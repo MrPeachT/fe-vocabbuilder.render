@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="ui header">Test Yourself</h2>
+    <h2 class="ui header" style="text-align: center;">Test Yourself</h2>
 
     <div v-if="!current">
       <button class="ui button primary" @click="next">Start Test</button>
@@ -25,7 +25,8 @@
       </div>
 
       <button class="ui button green" @click="check">Check</button>
-      <button class="ui button" @click="next">Next</button>
+      <button class="ui button blue" @click="next">Next</button>
+      <button class="ui button" @click="current = null">End Test</button>
 
       <div
         v-if="result"

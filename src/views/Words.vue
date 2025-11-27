@@ -1,12 +1,12 @@
 <template>
     <div>
-        <h1>Words</h1>
+        <h1 style="text-align: center;">Dictionary</h1>
         <table id="words" class="ui celled compact table">
             <thead>
                 <tr>
-                    <th>English</th>
-                    <th>German</th>
-                    <th>Vietnamese</th>
+                    <th><i class="united kingdom flag"></i>English</th>
+                    <th><i class="germany flag"></i>German</th>
+                    <th><i class="vietnam flag"></i>Vietnamese</th>
                     <th colspan="3"></th>
                 </tr>
             </thead>
@@ -15,11 +15,9 @@
                 <td>{{  word.german }}</td>
                 <td>{{  word.vietnamese }}</td>
                 <td width="75" class="center aligned">
-                <router-link :to="{ name: 'show' , params: { id: word._id }}">Show</router-link></td>
-                <td width="75" class="center aligned">
-                <router-link :to="{ name: 'edit' , params: { id: word._id }}">Edit</router-link></td>
+                <router-link :to="{ name: 'show' , params: { id: word._id }}" class="ui button green">Show</router-link></td>
                 <td width="75" class="center aligned" @click.prevent="onDestroy(word._id)">
-                <a :href="`/words/${word._id}`">Delete</a></td>
+                <a :href="`/words/${word._id}`" class="ui button">Delete</a></td>
             </tr>
         </table>
     </div>
