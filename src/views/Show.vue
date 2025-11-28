@@ -5,12 +5,15 @@
     <p><strong>English:</strong> {{ word.english }}</p>
     <p><strong>German:</strong> {{ word.german }}</p>
     <p><strong>Vietnamese:</strong> {{ word.vietnamese }}</p>
-    <router-link :to="{ name: 'edit'}" class="ui button green" :params="{ id: word._id }">
-      Edit
-    </router-link>
-    <router-link :to="{ name: 'words' }" class="ui button">
-      Back to list
-    </router-link>
+    <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 20px;">
+      <router-link :to="`/words/${word._id}/edit`" class="ui green button">
+        Edit
+      </router-link>
+
+      <router-link to="/words" class="ui button red">
+        Back to List
+      </router-link>
+    </div>
   </div>
 
   <div v-else>

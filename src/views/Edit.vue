@@ -4,8 +4,8 @@
     <word-form :word="word" @createOrUpdate="createOrUpdate" />
 
     <div style="margin-top: 20px; text-align: center;">
-      <router-link :to="{ name: 'words' }" class="ui button">
-        Back to list
+      <router-link :to="{ name: 'words' }" class="ui button red">
+        Back to List
       </router-link>
     </div>
   </div>

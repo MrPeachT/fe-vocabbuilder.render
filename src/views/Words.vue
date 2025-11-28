@@ -17,7 +17,7 @@
                 <td width="75" class="center aligned">
                 <router-link :to="{ name: 'show' , params: { id: word._id }}" class="ui button green">Show</router-link></td>
                 <td width="75" class="center aligned" @click.prevent="onDestroy(word._id)">
-                <a :href="`/words/${word._id}`" class="ui button">Delete</a></td>
+                <a :href="`/words/${word._id}`" class="ui button red">Delete</a></td>
             </tr>
         </table>
     </div>

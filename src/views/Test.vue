@@ -2,7 +2,7 @@
   <div>
     <h2 class="ui header" style="text-align: center;">Test Yourself</h2>
 
-    <div v-if="!current">
+    <div v-if="!current" style="display: flex; justify-content: center; margin-top: 1rem;">
       <button class="ui button primary" @click="next">Start Test</button>
     </div>
 
@@ -24,9 +24,11 @@
         />
       </div>
 
-      <button class="ui button green" @click="check">Check</button>
-      <button class="ui button blue" @click="next">Next</button>
-      <button class="ui button" @click="current = null">End Test</button>
+      <div style="display: flex; justify-content: center; margin-top: 1rem;">
+        <button class="ui button green" @click="check">Check</button>
+        <button class="ui button blue" @click="next">Next</button>
+        <button class="ui button red" @click="current = null">End Test</button>
+      </div>
 
       <div
         v-if="result"
