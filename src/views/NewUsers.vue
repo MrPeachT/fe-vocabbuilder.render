@@ -93,7 +93,7 @@ export default {
 
       try {
         await axios.post(
-          "http://localhost:3000/admin/users",
+          "https://vocab-backend.onrender.com/admin/users",
           {
             email: this.email,
             password: this.password,

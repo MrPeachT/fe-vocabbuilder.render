@@ -63,7 +63,7 @@ export default {
     try {
       const id = this.$route.params.id;
       const res = await axios.get(
-        `http://localhost:3000/admin/users/${id}`,
+        `https://vocab-backend.onrender.com/admin/users/${id}`,
         { withCredentials: true }
       );
       this.user = res.data;

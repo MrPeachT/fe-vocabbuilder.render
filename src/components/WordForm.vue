@@ -103,7 +103,7 @@ export default {
 
       try {
         const res = await axios.post(
-          "http://localhost:3000/api/upload",
+          "https://vocab-backend.onrender.com/api/upload",
           formData,
           {
             headers: {

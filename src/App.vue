@@ -78,7 +78,7 @@ export default {
   },
   async created() {
     try {
-      const res = await axios.get("http://localhost:3000/auth/me", {
+      const res = await axios.get("https://vocab-backend.onrender.com/auth/me", {
         withCredentials: true
       });
       this.user = res.data;              
@@ -91,7 +91,7 @@ export default {
     async logout() {
       try {
         await axios.post(
-          "http://localhost:3000/auth/logout",
+          "https://vocab-backend.onrender.com/auth/logout",
           {},
           { withCredentials: true }
         );

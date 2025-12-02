@@ -87,7 +87,7 @@ export default {
       this.userId = id;
 
       const res = await axios.get(
-        `http://localhost:3000/admin/users/${id}`,
+        `https://vocab-backend.onrender.com/admin/users/${id}`,
         { withCredentials: true }
       );
 
@@ -136,7 +136,7 @@ export default {
         }
 
         await axios.put(
-          `http://localhost:3000/admin/users/${this.userId}`,
+          `https://vocab-backend.onrender.com/admin/users/${this.userId}`,
           payload,
           { withCredentials: true }
         );

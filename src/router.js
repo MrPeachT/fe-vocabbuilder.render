@@ -98,7 +98,7 @@ router.beforeEach(async (to, from, next) => {
   }
 
   try {
-    const res = await axios.get('http://localhost:3000/auth/me', {
+    const res = await axios.get('https://vocab-backend.onrender.com/auth/me', {
       withCredentials: true
     });
 
