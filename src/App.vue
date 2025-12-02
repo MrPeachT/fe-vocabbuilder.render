@@ -19,6 +19,14 @@
             <i class="graduation cap icon"></i> Quiz Test
           </router-link>
 
+          <router-link
+            v-if="user && user.role === 'admin'"
+            to="/admin/users"
+            class="item"
+          >
+            <i class="users cog icon"></i> Manage Accounts
+          </router-link>
+
           <div class="right menu">
             <router-link
               v-if="!user"
@@ -58,17 +66,22 @@ import axios from "axios";
 
 export default {
   name: "App",
-  data() {
-    return {
-      user: null
-    };
+  computed: {
+    user: {
+      get() {
+        return this.$root.user;         
+      },
+      set(val) {
+        this.$root.user = val;          
+      }
+    }
   },
   async created() {
     try {
       const res = await axios.get("http://localhost:3000/auth/me", {
         withCredentials: true
       });
-      this.user = res.data; 
+      this.user = res.data;              
     } catch (err) {
       console.error("Failed to load current user", err);
       this.user = null;
@@ -82,12 +95,16 @@ export default {
           {},
           { withCredentials: true }
         );
+
         this.user = null;
-        this.$flash("Logged out", "success");
-        this.$router.push("/words");
+
+        this.flash("Logged out", "success");
+
+        this.$router.push("/login");
+
       } catch (err) {
         console.error("Logout failed", err);
-        this.$flash("Logout failed", "error");
+        this.flash("Logout failed", "error");
       }
     }
   }
@@ -119,7 +136,7 @@ div.input {
   margin-bottom: 10px;
 }
 
-button.ui.button {
+form button.ui.button {
   margin-top: 15px;
   display: block;
 }

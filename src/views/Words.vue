@@ -7,7 +7,8 @@
           <th><i class="united kingdom flag"></i>English</th>
           <th><i class="germany flag"></i>German</th>
           <th><i class="vietnam flag"></i>Vietnamese</th>
-          <th colspan="2"></th>
+          <th></th>  
+          <th></th>  
         </tr>
       </thead>
 
@@ -29,20 +30,23 @@
           v-if="canModify(word)"
           width="75"
           class="center aligned"
-          @click.prevent="onDestroy(word._id)"
         >
-          <a :href="`/words/${word._id}`" class="ui button red">Delete</a>
+          <button class="ui button red" @click.prevent="onDestroy(word._id)">
+            Delete
+          </button>
         </td>
+
+        <td v-else width="75"></td>
       </tr>
     </table>
   </div>
 </template>
 
 <script>
-import { api } from '../helpers/helpers';
+import { api } from "../helpers/helpers";
 
 export default {
-  name: 'words',
+  name: "words",
   data() {
     return {
       words: []
@@ -50,24 +54,25 @@ export default {
   },
   computed: {
     currentUser() {
-      return this.$root.user; 
+      return this.$root.user;
     }
   },
   methods: {
     canModify(word) {
       const u = this.currentUser;
       if (!u) return false;
-      if (u.role === 'admin') return true;
-      return word.owner === u.id;  
+
+      if (u.role === "admin") return true;
+
+      return word.owner === u.id;
     },
 
     async onDestroy(id) {
-      const sure = window.confirm('Are you sure you want to delete this word?');
+      const sure = window.confirm("Are you sure you want to delete this word?");
       if (!sure) return;
 
-      await api.deleteWord(id); 
-
-      this.flash('Word deleted successfully!', 'success');
+      await api.deleteWord(id);
+      this.flash("Word deleted successfully!", "success");
       this.words = this.words.filter(word => word._id !== id);
     }
   },

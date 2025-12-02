@@ -80,7 +80,6 @@ export default {
 
         this.$root.user = me.data;
 
-        // FIX HERE
         this.flash("Account created! You are now logged in.", "success");
 
         this.$router.push("/words");

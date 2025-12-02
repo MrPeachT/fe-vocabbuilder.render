@@ -76,7 +76,6 @@ export default {
 
         this.$root.user = me.data;
 
-        // FIX HERE
         this.flash("Welcome back!", "success");
 
         this.$router.push("/words");

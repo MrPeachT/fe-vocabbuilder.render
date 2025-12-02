@@ -10,6 +10,11 @@ import Test from './views/Test.vue';
 import Login from './views/Login.vue';
 import Register from './views/Register.vue';
 
+import ManageUsers from './views/ManageUsers.vue';
+import NewUsers from './views/NewUsers.vue';
+import ShowUsers from './views/ShowUsers.vue';
+import EditUsers from './views/EditUsers.vue';
+
 Vue.use(Router);
 
 const router = new Router({
@@ -57,12 +62,38 @@ const router = new Router({
       path: '/register',
       name: 'register',
       component: Register
+    },
+
+    {
+      path: '/admin/users',
+      name: 'manage-users',
+      component: ManageUsers,
+      meta: { requiresAuth: true, requiresAdmin: true }
+    },
+    {
+      path: '/admin/users/new',
+      name: 'new-user',
+      component: NewUsers,
+      meta: { requiresAuth: true, requiresAdmin: true }
+    },
+    {
+      path: '/admin/users/:id',
+      name: 'show-user',
+      component: ShowUsers,
+      meta: { requiresAuth: true, requiresAdmin: true }
+    },
+    {
+      path: '/admin/users/:id/edit',
+      name: 'edit-user',
+      component: EditUsers,
+      meta: { requiresAuth: true, requiresAdmin: true }
     }
   ]
 });
 
 router.beforeEach(async (to, from, next) => {
-  if (!to.matched.some(record => record.meta.requiresAuth)) {
+  const needsAuth = to.matched.some(r => r.meta.requiresAuth || r.meta.requiresAdmin);
+  if (!needsAuth) {
     return next();
   }
 
@@ -71,14 +102,23 @@ router.beforeEach(async (to, from, next) => {
       withCredentials: true
     });
 
-    if (res.data) {
-      return next();
+    const user = res.data;
+
+    if (!user) {
+      return next('/login');
     }
+
+    const needsAdmin = to.matched.some(r => r.meta.requiresAdmin);
+
+    if (needsAdmin && user.role !== 'admin') {
+      return next('/words');  
+    }
+
+    return next();
   } catch (err) {
     console.error('Guard: not logged in or /auth/me failed', err);
+    return next('/login');
   }
-
-  next('/login');
 });
 
 export default router;
