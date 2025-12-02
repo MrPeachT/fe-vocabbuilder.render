@@ -12,7 +12,13 @@ Vue.use(vueFlashMessage, {
 
 const vm = new Vue();
 
-const baseURL = "https://vocab-backend-6bjj.onrender.com/words/";
+const client = axios.create({
+  baseURL: "https://vocab-backend-6bjj.onrender.com",
+  withCredentials: true,         
+  headers: {
+    "Content-Type": "application/json"
+  }
+});
 
 const handleError = fn => async (...params) => {
   try {
@@ -27,38 +33,33 @@ const handleError = fn => async (...params) => {
       (status ? `${status}: ${statusText}` : error.message || "Request failed");
 
     vm.flash(msg, "error");
-
     throw error;
   }
 };
 
 export const api = {
   getWord: handleError(async id => {
-    const res = await axios.get(baseURL + id, { withCredentials: true });
+    const res = await client.get(`/words/${id}`);
     return res.data;
   }),
 
   getWords: handleError(async () => {
-    const res = await axios.get(baseURL, { withCredentials: true });
+    const res = await client.get("/words");
     return res.data;
   }),
 
   deleteWord: handleError(async id => {
-    const res = await axios.delete(baseURL + id, { withCredentials: true });
+    const res = await client.delete(`/words/${id}`);
     return res.data;
   }),
 
-  createWord: handleError(async function (payload) {
-    const res = await axios.post(baseURL, payload, { withCredentials: true });
+  createWord: handleError(async payload => {
+    const res = await client.post("/words", payload);
     return res.data;
   }),
 
   updateWord: handleError(async payload => {
-    const res = await axios.put(
-      baseURL + payload._id,
-      payload,
-      { withCredentials: true }
-    );
+    const res = await client.put(`/words/${payload._id}`, payload);
     return res.data;
   })
 };

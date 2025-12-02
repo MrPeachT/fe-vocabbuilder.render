@@ -7,8 +7,8 @@
           <th><i class="united kingdom flag"></i>English</th>
           <th><i class="germany flag"></i>German</th>
           <th><i class="vietnam flag"></i>Vietnamese</th>
-          <th></th>  
-          <th></th>  
+          <th></th>
+          <th></th>
         </tr>
       </thead>
 
@@ -61,9 +61,7 @@ export default {
     canModify(word) {
       const u = this.currentUser;
       if (!u) return false;
-
       if (u.role === "admin") return true;
-
       return word.owner === u.id;
     },
 
