@@ -62,7 +62,7 @@ export default {
 
       try {
         await axios.post(
-          "https://vocab-backend.onrender.com/auth/login",
+          "https://vocab-backend-6bjj.onrender.com/auth/login",
           {
             email: this.email,
             password: this.password
@@ -70,7 +70,7 @@ export default {
           { withCredentials: true }
         );
 
-        const me = await axios.get("https://vocab-backend.onrender.com/auth/me", {
+        const me = await axios.get("https://vocab-backend-6bjj.onrender.com/auth/me", {
           withCredentials: true
         });
 

@@ -12,7 +12,7 @@ Vue.use(vueFlashMessage, {
 
 const vm = new Vue();
 
-const baseURL = "https://vocab-backend.onrender.com/words/";
+const baseURL = "https://vocab-backend-6bjj.onrender.com/words/";
 
 const handleError = fn => async (...params) => {
   try {

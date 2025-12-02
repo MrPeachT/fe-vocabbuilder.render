@@ -66,7 +66,7 @@ export default {
   },
 
   async created() {
-    const res = await axios.get("https://vocab-backend.onrender.com/admin/users", {
+    const res = await axios.get("https://vocab-backend-6bjj.onrender.com/admin/users", {
       withCredentials: true
     });
     this.users = res.data;
@@ -90,7 +90,7 @@ export default {
 
       try {
         await axios.put(
-          `https://vocab-backend.onrender.com/admin/users/${user._id}/role`,
+          `https://vocab-backend-6bjj.onrender.com/admin/users/${user._id}/role`,
           { role: user.role },
           { withCredentials: true }
         );
@@ -109,7 +109,7 @@ export default {
 
       try {
         await axios.delete(
-          `https://vocab-backend.onrender.com/admin/users/${user._id}`,
+          `https://vocab-backend-6bjj.onrender.com/admin/users/${user._id}`,
           { withCredentials: true }
         );
         this.users = this.users.filter(u => u._id !== user._id);
